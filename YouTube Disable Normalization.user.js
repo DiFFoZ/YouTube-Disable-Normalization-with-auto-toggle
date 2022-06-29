@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1.valxe
 // @description  Allows true 100% volume on youtube videos.
-// @author       Wouter Gerarts, edited by Valxe
+// @author       Wouter Gerarts, edited by Valxe, DiFFoZ
 // @match        https://www.youtube.com/*
 // @match        https://youtube.com/*
 // @grant        GM_setValue
@@ -47,6 +47,7 @@ var alwaysEnable = true;
     function setFullVolume(){
         var video = baseElement().querySelector('video');
         video.volume = 1;
+        console.log("Set the volume to 1");
     }
 
     function getCurrentVolume(){
@@ -81,7 +82,7 @@ var alwaysEnable = true;
         var volumeSliderValue = parseFloat(volumeSliderLeft) * 2.5;
         console.log('Checking slider ' + round(volumeSliderValue / 100, 2).toString() + ' against value ' + round(video.volume, 2).toString());
         if (alwaysEnable || volumeSliderValue / 100 > video.volume) {
-            var videoTitleElement = baseElement().querySelector('.ytd-video-primary-info-renderer');
+            var videoTitleElement = baseElement().querySelector('.ytd-watch-metadata');
             videoTitleElement.appendChild(createFullVolumeButton());
             videoTitleElement.appendChild(createVolumeDenormalizeToggle());
             console.log(GM_getValue('VDT'));
